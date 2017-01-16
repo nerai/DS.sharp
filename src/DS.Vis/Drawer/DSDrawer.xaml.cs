@@ -28,6 +28,21 @@ namespace DS.Vis
 		private readonly ObservableCollection<NodeVis> _ObservableNodes = new ObservableCollection<NodeVis> ();
 		private readonly ObservableCollection<PacketVis> _ObservablePackets = new ObservableCollection<PacketVis> ();
 
+		public bool DisplayPacketList {
+			get {
+				bool v = false;
+				Dispatcher.Invoke ((Action) (() => {
+					v = grpArrivingPackets.Visibility == Visibility.Hidden;
+				}));
+				return v;
+			}
+			set {
+				Dispatcher.Invoke ((Action) (() => {
+					grpArrivingPackets.Visibility = Visibility.Hidden;
+				}));
+			}
+		}
+
 		public DSDrawer ()
 		{
 			InitializeComponent ();
