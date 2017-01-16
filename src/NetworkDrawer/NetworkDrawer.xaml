@@ -1,0 +1,24 @@
+﻿<UserControl
+		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:local="clr-namespace:NetworkDrawing"
+		mc:Ignorable="d"
+		MouseMove="Control_MouseMove"
+		MouseDown="Control_MouseDown"
+		d:DesignHeight="500" d:DesignWidth="600">
+	<Grid>
+		<Drawer:ContextMenu_Packet x:Name="ContextMenuPacket" Visibility="Hidden" />
+		<Drawer:ContextMenu_Node x:Name="ContextMenuNode" Visibility="Hidden" />
+		<GroupBox x:Name="grpArrivingPackets" Header="Next packets to arrive" Height="318" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,10,10,0" Width="234">
+			<Grid>
+				<ListBox x:Name="lstPackets" Margin="10,10,10,131" SelectionChanged="lstPackets_SelectionChanged" />
+				<TextBox x:Name="txtPacketDetails" Margin="10,170,5,10" TextWrapping="Wrap" IsReadOnly="True" IsReadOnlyCaretVisible="True" />
+			</Grid>
+		</GroupBox>
+		<GroupBox Visibility="Hidden" x:Name="grpPacketLog" Header="Packet log" Height="153" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,333,10,-86" Width="234">
+			<TextBlock x:Name="txtPacketLog" Margin="10,10,5,5" TextWrapping="Wrap" Text="" />
+		</GroupBox>
+	</Grid>
+</UserControl>

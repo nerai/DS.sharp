@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DS.Structures", "DS.Structu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DS.Vis", "DS.Vis\DS.Vis.csproj", "{5ADD9CFE-1739-4E79-B3E5-E9B3D63A563D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetworkDrawing", "NetworkDrawer\NetworkDrawing.csproj", "{A94A4209-AAEE-4A1E-9DB4-45C899C02C67}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{5ADD9CFE-1739-4E79-B3E5-E9B3D63A563D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5ADD9CFE-1739-4E79-B3E5-E9B3D63A563D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5ADD9CFE-1739-4E79-B3E5-E9B3D63A563D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A94A4209-AAEE-4A1E-9DB4-45C899C02C67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A94A4209-AAEE-4A1E-9DB4-45C899C02C67}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A94A4209-AAEE-4A1E-9DB4-45C899C02C67}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A94A4209-AAEE-4A1E-9DB4-45C899C02C67}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
