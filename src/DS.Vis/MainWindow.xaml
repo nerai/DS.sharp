@@ -1,0 +1,76 @@
+﻿<Window x:Class="DS.Vis.MainWindow"
+		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DS.Vis"
+        mc:Ignorable="d"
+		d:DesignHeight="600" d:DesignWidth="700"
+        Title="Distributed data structures 2016 // Sebastian Heuchler">
+	<Grid>
+		<local:DSDrawer x:Name="drawer" />
+		<GroupBox x:Name="grpLayout" Header="Layout" HorizontalAlignment="Left" Height="57" Margin="10,103,0,0" VerticalAlignment="Top" Width="243">
+			<Grid>
+				<CheckBox x:Name="chkFreeze" Content="Freeze Layout" HorizontalAlignment="Left" Margin="10,13,0,0" VerticalAlignment="Top" Checked="chkFreeze_Checked" Unchecked="chkFreeze_Checked" />
+				<CheckBox x:Name="chkLayoutCircle" Content="Layout as circle" HorizontalAlignment="Left" Margin="123,13,0,0" VerticalAlignment="Top" Checked="chkLayoutCircle_Checked" Unchecked="chkLayoutCircle_Checked" />
+			</Grid>
+		</GroupBox>
+		<Label x:Name="lblCurrentRoundLabel" Content="Current round: " HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" />
+		<Label x:Name="lblCurrentRound" Content="0" HorizontalAlignment="Left" Margin="106,10,0,0" VerticalAlignment="Top" />
+		<Label x:Name="lblTotalNodesCaption" Content="# Nodes: " HorizontalAlignment="Left" Margin="15,41,0,0" VerticalAlignment="Top" />
+		<Label x:Name="lblTotalNodes" Content="0" HorizontalAlignment="Left" Margin="81,41,0,0" VerticalAlignment="Top" />
+		<Label x:Name="lblTotalPacketsCaption" Content="# Packets: " HorizontalAlignment="Left" Margin="15,72,0,0" VerticalAlignment="Top" />
+		<Label x:Name="lblTotalPackets" Content="0" HorizontalAlignment="Left" Margin="81,72,0,0" VerticalAlignment="Top" />
+		<GroupBox x:Name="grpNodes" Header="Create new nodes" HorizontalAlignment="Left" Margin="15,165,0,0" VerticalAlignment="Top" Height="117" Width="243">
+			<Grid Margin="6,6,6,6" ShowGridLines="True">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="*" />
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="*" />
+					<RowDefinition Height="*" />
+					<RowDefinition Height="*" />
+				</Grid.RowDefinitions>
+				<Label Grid.Row="0" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+					Create new
+				</Label>
+				<Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Center">
+					Connected
+				</Label>
+				<Label Grid.Row="2" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Center">
+					Not connected
+				</Label>
+				<Label Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Center">
+					Skip+
+				</Label>
+				<Label Grid.Row="0" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Center">
+					LinkedList
+				</Label>
+				<Button Grid.Column="1" Grid.Row="1" x:Name="cmdCreateNode_SkipPlusC" Content="c. Skip+" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="cmdCreateNode_SkipPlusC_Click" />
+				<Button Grid.Column="2" Grid.Row="1" x:Name="cmdCreateNode_LinkedListC" Content="c. DLL" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="cmdCreateNode_LinkedListC_Click" />
+				<Button Grid.Column="1" Grid.Row="2" x:Name="cmdCreateNode_SkipPlusNC" Content="nc. Skip+" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="cmdCreateNode_SkipPlusNC_Click" />
+				<Button Grid.Column="2" Grid.Row="2" x:Name="cmdCreateNode_LinkedListNC" Content="nc. DLL" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="cmdCreateNode_LinkedListNC_Click" />
+			</Grid>
+		</GroupBox>
+		<GroupBox Header="Create packets" HorizontalAlignment="Left" Height="80" Margin="15,287,0,0" VerticalAlignment="Top" Width="243">
+			<Grid>
+				<Label Content="Create random messages: " HorizontalAlignment="Left" Margin="0,2,0,0" VerticalAlignment="Top" />
+				<Button x:Name="cmdCreateMessages1" Content="1" HorizontalAlignment="Left" Margin="10,28,0,0" VerticalAlignment="Top" Width="31" Click="cmdCreateMessages1_Click" />
+				<Button x:Name="cmdCreateMessages10" Content="10" HorizontalAlignment="Left" Margin="46,28,0,0" VerticalAlignment="Top" Width="31" Click="cmdCreateMessages10_Click" />
+				<Button x:Name="cmdCreateMessages100" Content="100" HorizontalAlignment="Left" Margin="82,28,0,0" VerticalAlignment="Top" Width="31" Click="cmdCreateMessages100_Click" />
+				<CheckBox x:Name="chkCreateRandomMessages" Content="Auto" HorizontalAlignment="Left" Margin="128,31,0,0" VerticalAlignment="Top" Checked="chkCreateRandomMessages_Checked" Unchecked="chkCreateRandomMessages_Checked" />
+			</Grid>
+		</GroupBox>
+		<GroupBox Header="Processing" HorizontalAlignment="Left" Height="99" Margin="15,372,0,0" VerticalAlignment="Top" Width="243">
+			<Grid>
+				<Button x:Name="cmdStepTick" Content="Next Tick" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="63" Click="cmdStepTick_Click" />
+				<Button x:Name="cmdStepMsg" Content="Next Msg" HorizontalAlignment="Left" Margin="78,10,0,0" VerticalAlignment="Top" Width="67" Click="cmdStepMsg_Click" />
+				<Button x:Name="cmdStepMsg100" Content="Next 100 Msgs" HorizontalAlignment="Left" Margin="150,10,0,0" VerticalAlignment="Top" Width="75" Click="cmdStepMsg100_Click" />
+				<CheckBox x:Name="chkAdvanceMsgs" Content="Advance messages" HorizontalAlignment="Left" Margin="10,37,0,0" VerticalAlignment="Top" Checked="chkAdvanceMsgs_Checked" Unchecked="chkAdvanceMsgs_Checked" />
+				<CheckBox x:Name="chkAdvanceTicks" Content="Advance ticks" HorizontalAlignment="Left" Margin="10,58,0,0" VerticalAlignment="Top" Checked="chkAdvanceTicks_Checked" Unchecked="chkAdvanceTicks_Checked" />
+			</Grid>
+		</GroupBox>
+	</Grid>
+</Window>
