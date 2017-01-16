@@ -25,20 +25,8 @@ namespace NetworkDrawing
 		private readonly ObservableCollection<NodeVis> _ObservableNodes = new ObservableCollection<NodeVis> ();
 		private readonly ObservableCollection<PacketVis> _ObservablePackets = new ObservableCollection<PacketVis> ();
 
-		public bool DisplayPacketList {
-			get {
-				bool v = false;
-				Dispatcher.Invoke ((Action) (() => {
-					v = grpArrivingPackets.Visibility == Visibility.Hidden;
-				}));
-				return v;
-			}
-			set {
-				Dispatcher.Invoke ((Action) (() => {
-					grpArrivingPackets.Visibility = Visibility.Hidden;
-				}));
-			}
-		}
+		private readonly Dictionary<PacketVis, DateTime> _RecentlyArrivedPackets = new Dictionary<PacketVis, DateTime> ();
+		private readonly Dictionary<PacketVis, DateTime> _RecentlyCreatedPackets = new Dictionary<PacketVis, DateTime> ();
 
 		public NetworkDrawer ()
 		{
@@ -61,8 +49,20 @@ namespace NetworkDrawing
 			lstPackets.ItemsSource = _ObservablePackets;
 		}
 
-		private readonly Dictionary<PacketVis, DateTime> _RecentlyArrivedPackets = new Dictionary<PacketVis, DateTime> ();
-		private readonly Dictionary<PacketVis, DateTime> _RecentlyCreatedPackets = new Dictionary<PacketVis, DateTime> ();
+		public bool DisplayPacketList {
+			get {
+				bool v = false;
+				Dispatcher.Invoke ((Action) (() => {
+					v = grpArrivingPackets.Visibility == Visibility.Hidden;
+				}));
+				return v;
+			}
+			set {
+				Dispatcher.Invoke ((Action) (() => {
+					grpArrivingPackets.Visibility = Visibility.Hidden;
+				}));
+			}
+		}
 
 		private void C_SubjectRemoved (NodeVis nv)
 		{
