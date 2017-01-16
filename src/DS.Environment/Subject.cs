@@ -18,8 +18,6 @@ namespace DS.Environment
 			DSEnvironment.Instance.Add (this);
 		}
 
-		private Subject (bool dummy) { }
-
 		public void Start ()
 		{
 			IsStarted = true;
