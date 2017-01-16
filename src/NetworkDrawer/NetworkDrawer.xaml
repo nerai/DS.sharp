@@ -4,6 +4,7 @@
 		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		xmlns:local="clr-namespace:NetworkDrawing"
+		xmlns:Drawer="clr-namespace:NetworkDrawing" x:Class="NetworkDrawing.NetworkDrawer"
 		mc:Ignorable="d"
 		MouseMove="Control_MouseMove"
 		MouseDown="Control_MouseDown"

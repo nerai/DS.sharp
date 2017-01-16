@@ -8,13 +8,10 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
-using DS.Environment;
-using DS.Structures;
-using DS_Vis.Drawer;
 
-namespace DS.Vis
+namespace NetworkDrawing
 {
-	public partial class DSDrawer : UserControl
+	public partial class NetworkDrawer : UserControl
 	{
 		private readonly DrawerController _C;
 
@@ -43,11 +40,11 @@ namespace DS.Vis
 			}
 		}
 
-		public DSDrawer ()
+		public NetworkDrawer ()
 		{
 			InitializeComponent ();
 
-			_C = new DrawerController (DSEnvironment.Instance);
+			_C = new DrawerController ();
 			_C.InvalidateVisual += () => {
 				Dispatcher.Invoke (lstPackets.Items.Refresh);
 				Dispatcher.Invoke (InvalidateVisual, DispatcherPriority.Background);
