@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
 
-namespace DS_Vis.Drawer
+namespace NetworkDrawing
 {
 	internal static class DrawerBuffer
 	{
@@ -85,9 +85,15 @@ namespace DS_Vis.Drawer
 
 			if (highlightedNode != null) {
 				// Is there a connection from the highlighted node to this node?
-				var highlightKnownsThis = highlightedNode.Subj.ReportKnownNodes ().Contains (node.Subj);
+				var highlightKnownsThis = highlightedNode
+					.Subj
+					.ReportKnownNodes ()
+					.Contains (node.Subj);
 				// Is there a connection from this node to the highlighted node?
-				var thisKnownsHighlight = node.Subj.ReportKnownNodes ().Contains (highlightedNode.Subj);
+				var thisKnownsHighlight = node
+					.Subj
+					.ReportKnownNodes ()
+					.Contains (highlightedNode.Subj);
 
 				if (highlightKnownsThis && thisKnownsHighlight) {
 					return PenNodeBorderKnownKnows;

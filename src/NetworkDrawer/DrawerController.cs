@@ -7,17 +7,14 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
-using DS.Environment;
-using DS.Vis;
 
-namespace DS_Vis.Drawer
+namespace NetworkDrawing
 {
 	public class DrawerController
 	{
 		private readonly Random _R = new Random ();
-		private readonly Dictionary<Subject, NodeVis> _Nodes = new Dictionary<Subject, NodeVis> ();
-		private readonly Dictionary<Packet, PacketVis> _Packets = new Dictionary<Packet, PacketVis> ();
-		private readonly DSEnvironment E;
+		private readonly Dictionary<ISubject, NodeVis> _Nodes = new Dictionary<ISubject, NodeVis> ();
+		private readonly Dictionary<IPacket, PacketVis> _Packets = new Dictionary<IPacket, PacketVis> ();
 
 		public bool FreezeLayout = false;
 		public bool CircleLayout = false;
@@ -40,28 +37,8 @@ namespace DS_Vis.Drawer
 
 		public event Action<PacketVis> PacketRemoved = delegate { };
 
-		public DrawerController (DSEnvironment src)
+		public DrawerController ()
 		{
-			E = src;
-
-			src.SubjectAdded += OnSubjectAdded;
-			foreach (var subj in src.Subjects ()) {
-				OnSubjectAdded (subj);
-			}
-
-			src.SubjectRemoved += OnSubjectRemoved;
-
-			src.PacketAdded += OnPacketAdded;
-			foreach (var pack in src.Packets ()) {
-				OnPacketAdded (pack);
-			}
-
-			src.PacketArrived += OnPacketArrived;
-
-			src.PacketForwarded += OnPacketForwarded;
-
-			src.PacketRemoved += OnPacketRemoved;
-
 			new Thread (BackgroundImproveSpacing) {
 				IsBackground = true,
 				Name = "DSDrawer background update",
@@ -100,7 +77,7 @@ namespace DS_Vis.Drawer
 			}
 		}
 
-		private void OnSubjectAdded (Subject subj)
+		public void OnSubjectAdded (ISubject subj)
 		{
 			var p = new Point (_R.NextDouble (), _R.NextDouble ());
 			var sv = new NodeVis () {
@@ -116,12 +93,12 @@ namespace DS_Vis.Drawer
 			SubjectAdded (sv);
 		}
 
-		private void OnPacketAdded (Packet pack)
+		public void OnPacketAdded (IPacket pack)
 		{
 			Point p;
 			lock (_Nodes) {
 				if (pack.From == null) {
-					var to = _Nodes.TryGet ((Subject) pack.To);
+					var to = _Nodes.TryGet (pack.To);
 					if (to == null) {
 						return;
 					}
@@ -131,7 +108,7 @@ namespace DS_Vis.Drawer
 					p.Offset (dx, dy);
 				}
 				else {
-					var from = _Nodes.TryGet ((Subject) pack.From);
+					var from = _Nodes.TryGet ((ISubject) pack.From);
 					if (from == null) {
 						return;
 					}
@@ -152,7 +129,7 @@ namespace DS_Vis.Drawer
 			PacketAdded (pv);
 		}
 
-		private void OnPacketForwarded (Packet p)
+		public void OnPacketForwarded (IPacket p)
 		{
 			PacketVis pv;
 			lock (_Packets) {
@@ -164,7 +141,7 @@ namespace DS_Vis.Drawer
 			PacketForwarded (pv);
 		}
 
-		private void OnPacketArrived (Packet p)
+		public void OnPacketArrived (IPacket p)
 		{
 			Debug.Assert (p.State == PacketState.Delivered);
 
@@ -182,7 +159,7 @@ namespace DS_Vis.Drawer
 			PacketArrived (pv);
 		}
 
-		private void OnSubjectRemoved (Subject n)
+		public void OnSubjectRemoved (ISubject n)
 		{
 			NodeVis nv;
 			int count;
@@ -197,7 +174,7 @@ namespace DS_Vis.Drawer
 			SubjectRemoved (nv);
 		}
 
-		private void OnPacketRemoved (Packet p)
+		public void OnPacketRemoved (IPacket p)
 		{
 			PacketVis pv;
 			int n;
