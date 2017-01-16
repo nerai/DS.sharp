@@ -4,24 +4,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using DS.Environment;
 
-namespace DS_Vis.Drawer
+namespace NetworkDrawing
 {
 	public class PacketVis : VisBase
 	{
-		public Packet Pack;
-		public Point Origin;
+		public readonly IPacket Pack;
+		public Point Origin; // todo: readonly?
 		public bool IsTracked;
+
+		public PacketVis (IPacket pack)
+		{
+			Pack = pack;
+		}
 
 		public override string ToString ()
 		{
-			return Pack.ToStringShort ();
-		}
-
-		internal void ForceArrival ()
-		{
-			Pack.Arrive ();
+			return Pack.ToString ();
 		}
 	}
 }

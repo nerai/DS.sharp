@@ -55,7 +55,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Extensions.cs" />
+    <Compile Include="IPacket.cs" />
+    <Compile Include="ISubject.cs" />
+    <Compile Include="PacketState.cs" />
     <Compile Include="VisBase.cs" />
+    <Compile Include="WpfExtensions.cs" />
     <Page Include="ContextMenu_Node.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

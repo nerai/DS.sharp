@@ -4,13 +4,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using DS.Environment;
 
-namespace DS_Vis.Drawer
+namespace NetworkDrawing
 {
 	public class NodeVis : VisBase
 	{
-		public Subject Subj;
+		public readonly ISubject Subj;
 		public bool IsDragged;
+
+		public NodeVis (ISubject subj)
+		{
+			Subj = subj;
+		}
+
+		public override string ToString ()
+		{
+			return Subj.ToString ();
+		}
 	}
 }

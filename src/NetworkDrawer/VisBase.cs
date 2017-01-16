@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace DS_Vis.Drawer
+namespace NetworkDrawing
 {
 	public class VisBase
 	{
