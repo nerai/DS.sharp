@@ -7,5 +7,7 @@ namespace NetworkDrawing
 		long Coordinate { get; }
 
 		IEnumerable<ISubject> ReportKnownNodes ();
+
+		Dictionary<ISubject, string> ReportKnownConnections ();
 	}
 }

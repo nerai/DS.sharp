@@ -80,9 +80,8 @@ namespace NetworkDrawing
 		public void OnSubjectAdded (ISubject subj)
 		{
 			var p = new Point (_R.NextDouble (), _R.NextDouble ());
-			var sv = new NodeVis () {
+			var sv = new NodeVis (subj) {
 				Center = p,
-				Subj = subj,
 			};
 			int n;
 			lock (_Nodes) {
@@ -115,10 +114,9 @@ namespace NetworkDrawing
 					p = from.Center;
 				}
 			}
-			var pv = new PacketVis () {
+			var pv = new PacketVis (pack) {
 				Origin = p,
 				Center = p,
-				Pack = pack,
 			};
 			int n;
 			lock (_Packets) {
@@ -187,16 +185,6 @@ namespace NetworkDrawing
 			}
 			PacketCountChanged (n);
 			PacketArrived (pv);
-		}
-
-		public void RemovePacket (PacketVis pv)
-		{
-			E.RemovePacket (pv.Pack);
-		}
-
-		public void RemoveNode (NodeVis n)
-		{
-			E.RemoveNode (n.Subj);
 		}
 
 		private void BackgroundImproveSpacing ()

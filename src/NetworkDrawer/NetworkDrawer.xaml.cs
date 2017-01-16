@@ -241,10 +241,10 @@ namespace NetworkDrawing
 				foreach (var pair in knows) {
 					var to = pair.Key;
 					var reason = pair.Value;
-					if (!nodes.ContainsKey ((Subject) to)) {
+					if (!nodes.ContainsKey (to)) {
 						continue;
 					}
-					var p1 = ToScreen (nodes[(Subject) to].Center);
+					var p1 = ToScreen (nodes[to].Center);
 
 					// Indent line away from center for a more 'round' shape
 					var pm = new Point (
@@ -318,8 +318,8 @@ namespace NetworkDrawing
 				// Determine packet position
 				var srcNode = packet.Pack.From == null
 					? null
-					: nodes.TryGet ((Subject) packet.Pack.From);
-				var dstNode = nodes.TryGet ((Subject) packet.Pack.To);
+					: nodes.TryGet (packet.Pack.From);
+				var dstNode = nodes.TryGet (packet.Pack.To);
 				if (dstNode == null) {
 					continue;
 				}
@@ -351,7 +351,7 @@ namespace NetworkDrawing
 					var penh = DrawerBuffer.PenPacketBodyHighlight;
 					dc.DrawRectangle (Brushes.White, penh, largerect);
 
-					var text = packet.Pack.ToStringMultiline ();
+					var text = packet.Pack.Description ();
 					var ft = new FormattedText (
 						text,
 						CultureInfo.InvariantCulture,
@@ -384,8 +384,8 @@ namespace NetworkDrawing
 					queuerect);
 
 				// Connections
-				foreach (var refCon in packet.Pack.Payload.ReferencedNodes ()) {
-					var refNV = nodes.TryGet ((Subject) refCon);
+				foreach (var refCon in packet.Pack.ReferencedNodes ()) {
+					var refNV = nodes.TryGet (refCon);
 					if (refNV == null) {
 						continue;
 					}
@@ -394,6 +394,7 @@ namespace NetworkDrawing
 						queuerect.Center (),
 						nodeRect[refNV].Center ());
 				}
+				/* TODO: enable this in a general way, not just for 'referenced' and 'searched' nodes
 				var searchId = packet.Pack.Payload.SearchedNode ();
 				if (searchId.HasValue) {
 					var searchNode = nodes.Values.FirstOrDefault (node => searchId.Equals (node.Subj.Coordinate));
@@ -405,6 +406,7 @@ namespace NetworkDrawing
 						queuerect.Center (),
 						nodeRect[searchNode].Center ());
 				}
+				*/
 				if (srcNode != null) {
 					dc.DrawLine (
 						DrawerBuffer.PenPacketFromLink,
@@ -522,20 +524,6 @@ namespace NetworkDrawing
 				}
 			}
 
-			if (true
-				&& minNode != null
-				&& ControlNode != null
-				&& ControlNode != minNode
-				&& e.LeftButton != MouseButtonState.Pressed
-				&& ctrlKey
-				) {
-				var msg = new DsMsgLinearize (new[] { ControlNode.Subj });
-				DSEnvironment.Instance.CreatePacket (
-					ControlNode.Subj,
-					minNode.Subj,
-					msg);
-			}
-
 			// Redraw
 			InvalidateVisual ();
 		}
@@ -554,7 +542,7 @@ namespace NetworkDrawing
 
 			var displayPv = lstPackets.SelectedItem as PacketVis;
 			if (displayPv != null) {
-				txtPacketDetails.Text = displayPv.Pack.ToStringDetailed ();
+				txtPacketDetails.Text = displayPv.Pack.Description ();
 			}
 		}
 	}
