@@ -61,14 +61,6 @@
     <Compile Include="PacketState.cs" />
     <Compile Include="VisBase.cs" />
     <Compile Include="WpfExtensions.cs" />
-    <Page Include="ContextMenu_Node.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="ContextMenu_Packet.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="NetworkDrawer.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -80,12 +72,6 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="ContextMenu_Node.xaml.cs">
-      <DependentUpon>ContextMenu_Node.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ContextMenu_Packet.xaml.cs">
-      <DependentUpon>ContextMenu_Packet.xaml</DependentUpon>
     </Compile>
     <Compile Include="DrawerBuffer.cs" />
     <Compile Include="DrawerController.cs" />

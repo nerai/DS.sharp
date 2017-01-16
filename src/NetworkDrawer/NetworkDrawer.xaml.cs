@@ -61,9 +61,6 @@ namespace DS.Vis
 			_C.PacketArrived += C_PacketArrived;
 			_C.PacketRemoved += C_PacketRemoved;
 
-			ContextMenuPacket.C = _C;
-			ContextMenuNode.C = _C;
-
 			lstPackets.ItemsSource = _ObservablePackets;
 		}
 
@@ -540,31 +537,6 @@ namespace DS.Vis
 					ControlNode.Subj,
 					minNode.Subj,
 					msg);
-			}
-
-			// Context menu
-			if (e.RightButton == MouseButtonState.Pressed) {
-				if (minNode != null) {
-					ContextMenuNode.Visibility = Visibility.Visible;
-					ContextMenuNode.Margin = new Thickness (mouseabs.X, mouseabs.Y, 0, 0);
-					ContextMenuNode.N = minNode;
-				}
-				else if (minPacket != null) {
-					ContextMenuPacket.Visibility = Visibility.Visible;
-					ContextMenuPacket.Margin = new Thickness (mouseabs.X, mouseabs.Y, 0, 0);
-					ContextMenuPacket.P = minPacket;
-				}
-			}
-			else {
-				Point p;
-				p = new Point (ContextMenuNode.Margin.Left, ContextMenuNode.Margin.Top);
-				if (p.Distance (mouseabs) > 100) {
-					ContextMenuNode.Visibility = Visibility.Hidden;
-				}
-				p = new Point (ContextMenuPacket.Margin.Left, ContextMenuPacket.Margin.Top);
-				if (p.Distance (mouseabs) > 100) {
-					ContextMenuPacket.Visibility = Visibility.Hidden;
-				}
 			}
 
 			// Redraw
